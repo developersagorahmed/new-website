@@ -7,17 +7,18 @@ const addToDb = (id) => {
 	const storedCart = localStorage.getItem("shopping-cart");
 	if (storedCart) {
 		shoppingCard = JSON.parse(storedCart);
+		// console.log(shoppingCard);
 	} else {
 		shoppingCard = [];
 	}
-	let shoppingCardSigelitem = shoppingCard.find((card) => card.id === id);
-
+	let shoppingCardSigelitem = shoppingCard.find((card) => Object.keys(card)[0]===id);
+	console.log(shoppingCardSigelitem);
 	const quantity = shoppingCardSigelitem ? shoppingCardSigelitem[id] : null;
 
 	if (quantity) {
 		const newQuantity = quantity + 1;
 		shoppingCardSigelitem[id] = newQuantity;
-		shoppingCard = shoppingCard.filter((cart) => cart.id !== id);
+		shoppingCard = shoppingCard.filter((cart) =>  Object.keys(cart)[0] !== id);
 		shoppingCard.push(shoppingCardSigelitem);
 	} else {
 		shoppingCardSigel[id] = 1;
